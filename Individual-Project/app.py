@@ -60,7 +60,9 @@ def signup():
 
 @app.route('/index') 
 def index():
-		return render_template("index.html")
+	user = db.child("Users").child(login_session['user']['localId']).get().val()
+	full_name = user["full_name"]
+	return render_template("index.html", full_name=full_name)
 
 @app.route('/')
 def homepage():
